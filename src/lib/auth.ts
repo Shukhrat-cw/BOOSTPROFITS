@@ -76,9 +76,17 @@ export function getAllUsers(): User[] {
   return getUsers();
 }
 
+// Admin credentials - only this account can access admin panel
+const ADMIN_EMAIL = "elmurodovshuhrat977@gmail.com";
+const ADMIN_PASSWORD = "@Shuhrat2008";
+
 export function isAdmin(): boolean {
   const user = getCurrentUser();
-  return user?.role === "admin";
+  return user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+}
+
+export function getAdminCredentials() {
+  return { email: ADMIN_EMAIL, password: ADMIN_PASSWORD };
 }
 
 export function seedDemoUsers() {
