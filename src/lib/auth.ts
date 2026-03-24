@@ -34,7 +34,7 @@ export function signup(name: string, email: string, businessName: string, passwo
     email,
     businessName,
     signupDate: new Date().toISOString(),
-    role: users.length === 0 ? "admin" : "user",
+    role: "user",
   };
   // Store password hash (mock - just store it)
   const passwords = JSON.parse(localStorage.getItem("bp_passwords") || "{}");
