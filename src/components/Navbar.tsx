@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { getCurrentUser, logout } from "@/lib/auth";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -12,11 +14,12 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const user = getCurrentUser();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
       <nav className="container flex items-center justify-between h-16" aria-label="Main navigation">
-        <a href="#" className="text-xl font-extrabold tracking-tight text-primary">
+        <a href="/" className="text-xl font-extrabold tracking-tight text-primary">
           Boost<span className="text-accent">Profits</span>
         </a>
 
@@ -30,10 +33,26 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="hidden md:block">
-          <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
-            <a href="#pricing">Start Free Trial</a>
-          </Button>
+        <div className="hidden md:flex items-center gap-3">
+          {user ? (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/dashboard">Dashboard</Link>
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => { logout(); window.location.reload(); }}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/login">Log In</Link>
+              </Button>
+              <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
+                <Link to="/signup">Start Free Trial</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -62,9 +81,15 @@ const Navbar = () => {
               </li>
             ))}
             <li>
-              <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
-                <a href="#pricing" onClick={() => setMobileOpen(false)}>Start Free Trial</a>
-              </Button>
+              {user ? (
+                <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
+                  <Link to="/dashboard" onClick={() => setMobileOpen(false)}>Dashboard</Link>
+                </Button>
+              ) : (
+                <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
+                  <Link to="/signup" onClick={() => setMobileOpen(false)}>Start Free Trial</Link>
+                </Button>
+              )}
             </li>
           </ul>
         </div>
