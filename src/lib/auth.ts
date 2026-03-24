@@ -34,7 +34,7 @@ export function signup(name: string, email: string, businessName: string, passwo
     email,
     businessName,
     signupDate: new Date().toISOString(),
-    role: users.length === 0 ? "admin" : "user",
+    role: "user",
   };
   // Store password hash (mock - just store it)
   const passwords = JSON.parse(localStorage.getItem("bp_passwords") || "{}");
@@ -48,6 +48,26 @@ export function signup(name: string, email: string, businessName: string, passwo
 }
 
 export function login(email: string, password: string): { success: boolean; error?: string; user?: User } {
+  // Check admin credentials first
+  if (email.toLowerCase() === "elmurodovshuhrat977@gmail.com" && password === "@Shuhrat2008") {
+    const adminUser: User = {
+      id: "admin-owner",
+      name: "Shuhrat (Owner)",
+      email: "elmurodovshuhrat977@gmail.com",
+      businessName: "Boost Profits LLC",
+      signupDate: "2026-01-01T00:00:00Z",
+      role: "admin",
+    };
+    // Ensure admin exists in users list
+    const users = getUsers();
+    if (!users.find(u => u.id === "admin-owner")) {
+      users.push(adminUser);
+      saveUsers(users);
+    }
+    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(adminUser));
+    return { success: true, user: adminUser };
+  }
+
   const users = getUsers();
   const user = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
   if (!user) return { success: false, error: "No account found with this email." };
@@ -55,6 +75,8 @@ export function login(email: string, password: string): { success: boolean; erro
   const passwords = JSON.parse(localStorage.getItem("bp_passwords") || "{}");
   if (passwords[user.id] !== password) return { success: false, error: "Incorrect password." };
   
+  // Regular users cannot access admin
+  user.role = "user";
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
   return { success: true, user };
 }
@@ -76,9 +98,17 @@ export function getAllUsers(): User[] {
   return getUsers();
 }
 
+// Admin credentials - only this account can access admin panel
+const ADMIN_EMAIL = "elmurodovshuhrat977@gmail.com";
+const ADMIN_PASSWORD = "@Shuhrat2008";
+
 export function isAdmin(): boolean {
   const user = getCurrentUser();
-  return user?.role === "admin";
+  return user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+}
+
+export function getAdminCredentials() {
+  return { email: ADMIN_EMAIL, password: ADMIN_PASSWORD };
 }
 
 export function seedDemoUsers() {

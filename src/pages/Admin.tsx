@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getCurrentUser, getAllUsers, seedDemoUsers, logout, type User } from "@/lib/auth";
+import { getCurrentUser, getAllUsers, seedDemoUsers, logout, isAdmin, type User } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import {
   Users, TrendingUp, Download, LogOut, Home, Eye, FileText,
@@ -42,7 +42,7 @@ const Admin = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !isAdmin()) {
       navigate("/login");
       return;
     }

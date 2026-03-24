@@ -3,7 +3,7 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
-    text: "Boost Profits collected $34,000 of payments I'd almost given up on. Huge relief for my business.",
+    text: "Boost Profits collected $14,320 of payments I'd almost given up on. Huge relief for my business.",
     author: "Maria G.",
     role: "Small Retail Owner",
   },
