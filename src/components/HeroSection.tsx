@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -20,15 +21,20 @@ const HeroSection = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-bold text-base px-8 transition-transform hover:scale-105">
-                <a href="#pricing">
+                <Link to="/signup">
                   Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
+                </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-base px-8">
                 <a href="#how-it-works">
                   <Play className="mr-2 h-4 w-4" /> Learn How It Works
                 </a>
               </Button>
+            </div>
+            <div className="flex items-center gap-6 text-xs text-primary-foreground/50">
+              <span>🔒 HTTPS Secured</span>
+              <span>✓ GDPR Compliant</span>
+              <span>💳 Stripe / PayPal</span>
             </div>
           </div>
 
@@ -41,7 +47,7 @@ const HeroSection = () => {
                   {[60, 45, 80, 35, 90, 55, 75, 95, 50, 85, 70, 88].map((h, i) => (
                     <div
                       key={i}
-                      className="flex-1 rounded-t-sm"
+                      className="flex-1 rounded-t-sm transition-all duration-500"
                       style={{
                         height: `${h}%`,
                         backgroundColor: i >= 8 ? "hsl(0 100% 70%)" : "hsl(0 0% 100% / 0.3)",

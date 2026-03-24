@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -88,6 +89,7 @@ const Pricing = () => {
                 <span className="text-muted-foreground">/{annual ? "year" : "month"}</span>
               </div>
               <Button
+                asChild
                 className={`w-full font-bold text-base py-6 transition-transform hover:scale-[1.02] ${
                   plan.popular
                     ? "bg-accent text-accent-foreground hover:bg-accent/90"
@@ -95,7 +97,7 @@ const Pricing = () => {
                 }`}
                 aria-label={`Start free trial for ${plan.name} plan`}
               >
-                Start Free Trial
+                <Link to="/signup">Start Free Trial</Link>
               </Button>
               <ul className="space-y-3">
                 {plan.features.map((f) => (
@@ -108,6 +110,10 @@ const Pricing = () => {
             </div>
           ))}
         </div>
+
+        <p className="text-center text-xs text-muted-foreground">
+          🔒 Secure checkout via Stripe/PayPal · PCI-compliant · 30-day money-back guarantee
+        </p>
       </div>
     </section>
   );
