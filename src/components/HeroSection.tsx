@@ -57,9 +57,9 @@ const HeroSection = () => {
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Collected", value: "$48,250" },
-                    { label: "Pending", value: "$12,400" },
-                    { label: "Overdue", value: "$3,100" },
+                    { label: "Invoices Processed", value: "3,200+" },
+                    { label: "Avg. Payment Time Reduced", value: "34%" },
+                    { label: "Automation Accuracy", value: "98.2%" },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-primary-foreground/10 rounded-lg p-3 text-center">
                       <p className="text-xs text-primary-foreground/60">{stat.label}</p>

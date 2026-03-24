@@ -35,9 +35,9 @@ const Contact = () => {
             </div>
             <div className="space-y-4">
               {[
-                { icon: Mail, text: "hello@boostprofits.com" },
-                { icon: Phone, text: "+1 (555) 123-4567" },
-                { icon: MapPin, text: "Austin, TX, United States" },
+                { icon: Mail, text: "mrshukhrat010@gmail.com" },
+                { icon: Phone, text: "+998 (97) 867 41-12" },
+                { icon: MapPin, text: "Tashkent, Uzbekistan" },
               ].map((item) => (
                 <div key={item.text} className="flex items-center gap-3 text-muted-foreground">
                   <item.icon className="h-5 w-5 text-accent" />
