@@ -42,7 +42,7 @@ const Admin = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !isAdmin()) {
       navigate("/login");
       return;
     }
