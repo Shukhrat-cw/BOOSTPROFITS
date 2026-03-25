@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const plans = [
   {
@@ -39,10 +40,17 @@ const Pricing = () => {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="py-20 md:py-28 bg-background">
-      <div className="container space-y-16">
-        <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-primary">
+    <section className="section-snap bg-background">
+      <div className="container space-y-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4 max-w-2xl mx-auto"
+        >
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Pricing</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
             Simple, Transparent Pricing
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -51,26 +59,30 @@ const Pricing = () => {
 
           {/* Toggle */}
           <div className="flex items-center justify-center gap-3 pt-4">
-            <span className={`text-sm font-medium ${!annual ? "text-primary" : "text-muted-foreground"}`}>Monthly</span>
+            <span className={`text-sm font-medium transition-colors ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
             <button
               onClick={() => setAnnual(!annual)}
-              className={`relative h-7 w-12 rounded-full transition-colors ${annual ? "bg-accent" : "bg-border"}`}
+              className={`relative h-7 w-12 rounded-full transition-colors duration-300 ${annual ? "bg-accent" : "bg-border"}`}
               aria-label="Toggle annual pricing"
             >
-              <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-card shadow transition-transform ${annual ? "translate-x-5" : "translate-x-0.5"}`} />
+              <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-card shadow-md transition-transform duration-300 ${annual ? "translate-x-5" : "translate-x-0.5"}`} />
             </button>
-            <span className={`text-sm font-medium ${annual ? "text-primary" : "text-muted-foreground"}`}>
+            <span className={`text-sm font-medium transition-colors ${annual ? "text-foreground" : "text-muted-foreground"}`}>
               Annual <span className="text-accent text-xs font-bold">Save 17%</span>
             </span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {plans.map((plan) => (
-            <div
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {plans.map((plan, idx) => (
+            <motion.div
               key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
               className={`relative bg-card rounded-2xl border-2 p-8 space-y-6 transition-all duration-300 hover:shadow-xl ${
-                plan.popular ? "border-accent shadow-lg" : "border-border"
+                plan.popular ? "border-accent shadow-lg shadow-accent/10" : "border-border"
               }`}
             >
               {plan.popular && (
@@ -79,41 +91,36 @@ const Pricing = () => {
                 </span>
               )}
               <div>
-                <h3 className="text-2xl font-bold text-primary">{plan.name}</h3>
+                <h3 className="text-2xl font-display font-bold text-foreground">{plan.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-extrabold text-primary">
+                <span className="text-5xl font-display font-bold text-foreground transition-all duration-300">
                   ${annual ? plan.yearlyPrice : plan.monthlyPrice}
                 </span>
                 <span className="text-muted-foreground">/{annual ? "year" : "month"}</span>
               </div>
               <Button
                 asChild
-                className={`w-full font-bold text-base py-6 transition-transform hover:scale-[1.02] ${
+                className={`w-full font-bold text-base py-6 rounded-xl transition-all duration-200 hover:scale-[1.02] ${
                   plan.popular
-                    ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                    : "bg-primary text-primary-foreground hover:bg-primary/90"
+                    ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25"
+                    : "bg-foreground text-background hover:bg-foreground/90"
                 }`}
-                aria-label={`Start free trial for ${plan.name} plan`}
               >
                 <Link to="/signup">Start Free Trial</Link>
               </Button>
               <ul className="space-y-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
-                    <Check className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
+                    <Check className="h-4 w-4 mt-0.5 text-accent shrink-0" />
                     <span className="text-muted-foreground">{f}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
-
-        <p className="text-center text-xs text-muted-foreground">
-          🔒 Secure checkout via Stripe/PayPal · PCI-compliant · 30-day money-back guarantee
-        </p>
       </div>
     </section>
   );
