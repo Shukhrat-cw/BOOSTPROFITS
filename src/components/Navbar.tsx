@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -35,6 +35,15 @@ const Navbar = () => {
     setActiveModal(modal);
     setMobileOpen(false);
   };
+
+  // Listen for footer openModal events
+  useEffect(() => {
+    const handler = (e: CustomEvent<string>) => {
+      setActiveModal(e.detail as ModalName);
+    };
+    window.addEventListener("openModal" as any, handler);
+    return () => window.removeEventListener("openModal" as any, handler);
+  }, []);
 
   return (
     <>
