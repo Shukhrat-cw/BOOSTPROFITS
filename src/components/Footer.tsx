@@ -1,6 +1,26 @@
 import Logo from "@/components/Logo";
 
+const footerLinks = {
+  Product: [
+    { label: "Features", modal: "features" },
+    { label: "Pricing", modal: "pricing" },
+    { label: "How It Works", modal: "howItWorks" },
+  ],
+  Support: [
+    { label: "FAQ", modal: "faq" },
+    { label: "Contact Us", modal: "contact" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", modal: "legal" },
+    { label: "Terms of Service", modal: "legal" },
+  ],
+};
+
 const Footer = () => {
+  const openModal = (modal: string) => {
+    window.dispatchEvent(new CustomEvent("openModal", { detail: modal }));
+  };
+
   return (
     <footer className="bg-gradient-dark text-primary-foreground py-16">
       <div className="container">
@@ -8,34 +28,27 @@ const Footer = () => {
           <div className="space-y-4">
             <Logo className="text-primary-foreground" />
             <p className="text-sm text-primary-foreground/40 leading-relaxed">
-              Helping businesses collect unpaid invoices faster with intelligent automation.
+              Helping businesses collect unpaid invoices faster with intelligent automation. Our platform transforms how you manage cash flow.
             </p>
           </div>
 
-          <div className="space-y-3">
-            <p className="font-display font-semibold text-sm">Product</p>
-            <ul className="space-y-2 text-sm text-primary-foreground/40">
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">Features</span></li>
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">Pricing</span></li>
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">How It Works</span></li>
-            </ul>
-          </div>
-
-          <div className="space-y-3">
-            <p className="font-display font-semibold text-sm">Support</p>
-            <ul className="space-y-2 text-sm text-primary-foreground/40">
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">FAQ</span></li>
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">Contact Us</span></li>
-            </ul>
-          </div>
-
-          <div className="space-y-3">
-            <p className="font-display font-semibold text-sm">Legal</p>
-            <ul className="space-y-2 text-sm text-primary-foreground/40">
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">Privacy Policy</span></li>
-              <li><span className="hover:text-primary-foreground transition-colors cursor-pointer">Terms of Service</span></li>
-            </ul>
-          </div>
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category} className="space-y-3">
+              <p className="font-display font-semibold text-sm">{category}</p>
+              <ul className="space-y-2 text-sm text-primary-foreground/40">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <button
+                      onClick={() => openModal(link.modal)}
+                      className="hover:text-primary-foreground transition-colors cursor-pointer text-left"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="border-t border-primary-foreground/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
