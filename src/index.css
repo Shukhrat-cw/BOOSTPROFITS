@@ -121,30 +121,11 @@
   }
 
   .section-snap {
-    scroll-snap-align: start;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  .snap-container {
-    scroll-snap-type: y mandatory;
     overflow-y: auto;
-    height: 100vh;
-    scroll-behavior: smooth;
-  }
-
-  /* Custom scrollbar */
-  .snap-container::-webkit-scrollbar {
-    width: 4px;
-  }
-  .snap-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .snap-container::-webkit-scrollbar-thumb {
-    background: hsl(220 15% 70%);
-    border-radius: 4px;
   }
 }
 
