@@ -22,8 +22,8 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-dark text-primary-foreground py-16">
-      <div className="container">
+    <footer className="section-snap bg-gradient-dark text-primary-foreground">
+      <div className="container flex flex-col justify-center min-h-[100dvh] py-16">
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-10 mb-10">
           <div className="space-y-4">
             <Logo className="text-primary-foreground" />

@@ -29,7 +29,7 @@ const FullPageScroll = ({ children }: FullPageScrollProps) => {
       setTimeout(() => {
         isTransitioning.current = false;
         accumulatedDelta.current = 0;
-      }, 800);
+      }, 700);
     },
     [currentIndex, totalSections]
   );
@@ -52,13 +52,13 @@ const FullPageScroll = ({ children }: FullPageScrollProps) => {
     return false;
   }, []);
 
-  // Wheel — accumulate delta for smoother trackpad support
+  // Wheel
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
       if (isTransitioning.current) { e.preventDefault(); return; }
 
       const dir = e.deltaY > 0 ? "down" : "up";
-      if (canScrollSection(dir)) return; // let internal scroll happen
+      if (canScrollSection(dir)) return;
 
       e.preventDefault();
 
@@ -125,26 +125,23 @@ const FullPageScroll = ({ children }: FullPageScrollProps) => {
 
   const variants = {
     enter: (dir: number) => ({
-      y: dir > 0 ? "100%" : "-100%",
+      y: dir > 0 ? "60%" : "-60%",
       opacity: 0,
-      scale: 0.96,
     }),
     center: {
       y: "0%",
       opacity: 1,
-      scale: 1,
     },
     exit: (dir: number) => ({
-      y: dir > 0 ? "-100%" : "100%",
+      y: dir > 0 ? "-30%" : "30%",
       opacity: 0,
-      scale: 0.96,
     }),
   };
 
   return (
     <div ref={containerRef} className="relative h-[100dvh] w-full overflow-hidden">
       {/* Dot navigation */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-2">
         {Array.from({ length: totalSections }).map((_, i) => (
           <button
             key={i}
@@ -159,7 +156,7 @@ const FullPageScroll = ({ children }: FullPageScrollProps) => {
         ))}
       </div>
 
-      <AnimatePresence initial={false} custom={direction} mode="popLayout">
+      <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentIndex}
           ref={sectionRef}
@@ -169,9 +166,8 @@ const FullPageScroll = ({ children }: FullPageScrollProps) => {
           animate="center"
           exit="exit"
           transition={{
-            y: { type: "tween", duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] },
-            opacity: { duration: 0.5, ease: "easeInOut" },
-            scale: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] },
+            y: { type: "tween", duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.4, ease: "easeInOut" },
           }}
           className="absolute inset-0 h-[100dvh] w-full overflow-y-auto"
         >

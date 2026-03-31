@@ -19,12 +19,11 @@ const invoiceData = [
 ];
 
 const recentActivity = [
-  { id: 1, action: "Invoice #1042 paid", amount: "$2,400", time: "2 hours ago", status: "paid" },
-  { id: 2, action: "Reminder sent to Acme Corp", amount: "$5,100", time: "4 hours ago", status: "reminder" },
-  { id: 3, action: "Invoice #1038 partially paid", amount: "$1,200 / $3,600", time: "1 day ago", status: "partial" },
-  { id: 4, action: "Invoice #1035 overdue", amount: "$4,800", time: "2 days ago", status: "overdue" },
-  { id: 5, action: "Invoice #1031 paid", amount: "$1,950", time: "3 days ago", status: "paid" },
-  { id: 6, action: "Reminder sent to Beta LLC", amount: "$3,200", time: "3 days ago", status: "reminder" },
+  { id: 1, action: "Invoice #1004 paid", amount: "$340", time: "2 hours ago", status: "paid" },
+  { id: 2, action: "Reminder sent to Acme Corp", amount: "$520", time: "4 hours ago", status: "reminder" },
+  { id: 3, action: "Invoice #1003 partially paid", amount: "$120 / $360", time: "1 day ago", status: "partial" },
+  { id: 4, action: "Invoice #1002 overdue", amount: "$280", time: "2 days ago", status: "overdue" },
+  { id: 5, action: "Invoice #1001 paid", amount: "$195", time: "3 days ago", status: "paid" },
 ];
 
 const Dashboard = () => {
