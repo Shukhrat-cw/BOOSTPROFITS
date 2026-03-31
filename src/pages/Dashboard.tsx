@@ -10,12 +10,12 @@ import {
 } from "recharts";
 
 const invoiceData = [
-  { month: "Oct", collected: 38000, pending: 8000, overdue: 4200 },
-  { month: "Nov", collected: 42000, pending: 6500, overdue: 3800 },
-  { month: "Dec", collected: 45000, pending: 7200, overdue: 3100 },
-  { month: "Jan", collected: 48250, pending: 5800, overdue: 2900 },
-  { month: "Feb", collected: 51000, pending: 4500, overdue: 2200 },
-  { month: "Mar", collected: 53500, pending: 3800, overdue: 1800 },
+  { month: "Oct", collected: 800, pending: 200, overdue: 120 },
+  { month: "Nov", collected: 1100, pending: 180, overdue: 90 },
+  { month: "Dec", collected: 1400, pending: 250, overdue: 80 },
+  { month: "Jan", collected: 1650, pending: 160, overdue: 60 },
+  { month: "Feb", collected: 1900, pending: 140, overdue: 50 },
+  { month: "Mar", collected: 2400, pending: 120, overdue: 40 },
 ];
 
 const recentActivity = [
