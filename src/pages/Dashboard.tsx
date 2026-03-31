@@ -43,10 +43,10 @@ const Dashboard = () => {
   };
 
   const stats = [
-    { label: "Total Invoices", value: "156", icon: FileText, color: "text-primary" },
-    { label: "Collected", value: "$118,500", icon: DollarSign, color: "text-green-600" },
-    { label: "Pending", value: "$12,400", icon: Clock, color: "text-yellow-600" },
-    { label: "Overdue", value: "$3,100", icon: AlertTriangle, color: "text-accent" },
+    { label: "Total Invoices", value: "12", icon: FileText, color: "text-primary" },
+    { label: "Collected", value: "$2,400", icon: DollarSign, color: "text-green-600" },
+    { label: "Pending", value: "$520", icon: Clock, color: "text-yellow-600" },
+    { label: "Overdue", value: "$280", icon: AlertTriangle, color: "text-accent" },
   ];
 
   return (
