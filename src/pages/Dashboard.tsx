@@ -10,21 +10,20 @@ import {
 } from "recharts";
 
 const invoiceData = [
-  { month: "Oct", collected: 38000, pending: 8000, overdue: 4200 },
-  { month: "Nov", collected: 42000, pending: 6500, overdue: 3800 },
-  { month: "Dec", collected: 45000, pending: 7200, overdue: 3100 },
-  { month: "Jan", collected: 48250, pending: 5800, overdue: 2900 },
-  { month: "Feb", collected: 51000, pending: 4500, overdue: 2200 },
-  { month: "Mar", collected: 53500, pending: 3800, overdue: 1800 },
+  { month: "Oct", collected: 800, pending: 200, overdue: 120 },
+  { month: "Nov", collected: 1100, pending: 180, overdue: 90 },
+  { month: "Dec", collected: 1400, pending: 250, overdue: 80 },
+  { month: "Jan", collected: 1650, pending: 160, overdue: 60 },
+  { month: "Feb", collected: 1900, pending: 140, overdue: 50 },
+  { month: "Mar", collected: 2400, pending: 120, overdue: 40 },
 ];
 
 const recentActivity = [
-  { id: 1, action: "Invoice #1042 paid", amount: "$2,400", time: "2 hours ago", status: "paid" },
-  { id: 2, action: "Reminder sent to Acme Corp", amount: "$5,100", time: "4 hours ago", status: "reminder" },
-  { id: 3, action: "Invoice #1038 partially paid", amount: "$1,200 / $3,600", time: "1 day ago", status: "partial" },
-  { id: 4, action: "Invoice #1035 overdue", amount: "$4,800", time: "2 days ago", status: "overdue" },
-  { id: 5, action: "Invoice #1031 paid", amount: "$1,950", time: "3 days ago", status: "paid" },
-  { id: 6, action: "Reminder sent to Beta LLC", amount: "$3,200", time: "3 days ago", status: "reminder" },
+  { id: 1, action: "Invoice #1004 paid", amount: "$340", time: "2 hours ago", status: "paid" },
+  { id: 2, action: "Reminder sent to Acme Corp", amount: "$520", time: "4 hours ago", status: "reminder" },
+  { id: 3, action: "Invoice #1003 partially paid", amount: "$120 / $360", time: "1 day ago", status: "partial" },
+  { id: 4, action: "Invoice #1002 overdue", amount: "$280", time: "2 days ago", status: "overdue" },
+  { id: 5, action: "Invoice #1001 paid", amount: "$195", time: "3 days ago", status: "paid" },
 ];
 
 const Dashboard = () => {
@@ -43,10 +42,10 @@ const Dashboard = () => {
   };
 
   const stats = [
-    { label: "Total Invoices", value: "156", icon: FileText, color: "text-primary" },
-    { label: "Collected", value: "$118,500", icon: DollarSign, color: "text-green-600" },
-    { label: "Pending", value: "$12,400", icon: Clock, color: "text-yellow-600" },
-    { label: "Overdue", value: "$3,100", icon: AlertTriangle, color: "text-accent" },
+    { label: "Total Invoices", value: "12", icon: FileText, color: "text-primary" },
+    { label: "Collected", value: "$2,400", icon: DollarSign, color: "text-green-600" },
+    { label: "Pending", value: "$520", icon: Clock, color: "text-yellow-600" },
+    { label: "Overdue", value: "$280", icon: AlertTriangle, color: "text-accent" },
   ];
 
   return (

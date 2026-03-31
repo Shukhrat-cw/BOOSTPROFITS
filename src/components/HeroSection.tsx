@@ -12,7 +12,7 @@ const HeroSection = () => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none"
         poster=""
       >
         <source
@@ -21,19 +21,19 @@ const HeroSection = () => {
         />
       </video>
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(220,60%,6%)/0.92] via-[hsl(225,50%,10%)/0.88] to-[hsl(220,60%,8%)/0.9]" />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(220,60%,6%)/0.92] via-[hsl(225,50%,10%)/0.88] to-[hsl(220,60%,8%)/0.9] pointer-events-none" />
 
       {/* Animated glow orbs */}
       <motion.div
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-accent/15 blur-[120px]"
+        className="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-accent/15 blur-[120px] pointer-events-none"
       />
       <motion.div
         animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/4 -left-32 w-80 h-80 rounded-full bg-accent/8 blur-[100px]"
+        className="absolute bottom-1/4 -left-32 w-80 h-80 rounded-full bg-accent/8 blur-[100px] pointer-events-none"
       />
 
       <div className="container relative z-10 pt-20">
@@ -60,10 +60,10 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-lg text-primary-foreground/60 max-w-lg leading-relaxed">
-              Boost Profits LLC automates invoice collection, sends smart reminders, and helps you get paid faster — guaranteed results within 30 days. Our SaaS platform streamlines your entire accounts receivable workflow so you can focus on growing your business.
+              Boost Profits LLC automates invoice collection, sends smart reminders, and helps you get paid faster — guaranteed results within 30 days.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 relative z-20">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 font-bold text-base px-8 h-12 rounded-xl transition-all duration-200 hover:scale-[1.03] hover:shadow-lg hover:shadow-accent/25">
                 <Link to="/signup">
                   Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
@@ -90,12 +90,11 @@ const HeroSection = () => {
           >
             <div className="glass rounded-2xl p-6 shadow-2xl">
               <div className="bg-primary-foreground/5 rounded-xl p-5 space-y-5">
-                {/* Mini stat row */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: "Collected", value: "$118.5K", change: "+18%" },
-                    { label: "Pending", value: "$18.2K", change: "-8%" },
-                    { label: "Overdue", value: "$6.1K", change: "-24%" },
+                    { label: "Collected", value: "$2.4K", change: "+18%" },
+                    { label: "Pending", value: "$820", change: "-8%" },
+                    { label: "Overdue", value: "$310", change: "-24%" },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-primary-foreground/5 rounded-lg p-3 text-center">
                       <p className="text-[10px] text-primary-foreground/40">{stat.label}</p>
@@ -106,7 +105,6 @@ const HeroSection = () => {
                     </div>
                   ))}
                 </div>
-                {/* Mock chart */}
                 <div className="flex items-end gap-1.5 h-28">
                   {[60, 45, 80, 35, 90, 55, 75, 95, 50, 85, 70, 88].map((h, i) => (
                     <motion.div

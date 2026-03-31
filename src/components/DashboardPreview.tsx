@@ -27,7 +27,6 @@ const DashboardPreview = () => {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="max-w-4xl mx-auto"
         >
-          {/* Browser chrome */}
           <div className="bg-foreground rounded-t-2xl p-3">
             <div className="flex items-center gap-2 px-2">
               <div className="flex gap-1.5">
@@ -40,15 +39,14 @@ const DashboardPreview = () => {
               </div>
             </div>
           </div>
-          {/* Dashboard content */}
           <div className="bg-gradient-dark rounded-b-2xl p-6 md:p-10 border-x-2 border-b-2 border-foreground/10">
             <div className="space-y-6">
               <div className="grid grid-cols-4 gap-3">
                 {[
-                  { label: "Total Revenue", value: "$142.8K", change: "+12%", positive: true },
-                  { label: "Collected", value: "$118.5K", change: "+18%", positive: true },
-                  { label: "Pending", value: "$18.2K", change: "-8%", positive: false },
-                  { label: "Overdue", value: "$6.1K", change: "-24%", positive: false },
+                  { label: "Total Revenue", value: "$3.2K", change: "+12%", positive: true },
+                  { label: "Collected", value: "$2.4K", change: "+18%", positive: true },
+                  { label: "Pending", value: "$520", change: "-8%", positive: false },
+                  { label: "Overdue", value: "$280", change: "-24%", positive: false },
                 ].map((s) => (
                   <div key={s.label} className="bg-primary-foreground/5 rounded-xl p-3 text-center">
                     <p className="text-[10px] md:text-xs text-primary-foreground/40">{s.label}</p>
