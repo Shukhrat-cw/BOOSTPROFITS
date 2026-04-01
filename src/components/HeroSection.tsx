@@ -12,8 +12,10 @@ const HeroSection = () => {
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ zIndex: 0 }}
+        onCanPlay={(e) => (e.currentTarget as HTMLVideoElement).play().catch(() => {})}
       >
         <source
           src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-2391/1080p.mp4"
