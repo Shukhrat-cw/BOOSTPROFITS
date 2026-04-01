@@ -1,24 +1,44 @@
 import Logo from "@/components/Logo";
 
+const sectionLinks: Record<string, number> = {
+  Features: 2,
+  Pricing: 5,
+  "How It Works": 3,
+  FAQ: 7,
+  "Contact Us": 8,
+};
+
 const footerLinks = {
   Product: [
-    { label: "Features", modal: "features" },
-    { label: "Pricing", modal: "pricing" },
-    { label: "How It Works", modal: "howItWorks" },
+    { label: "Features", action: "section" },
+    { label: "Pricing", action: "section" },
+    { label: "How It Works", action: "section" },
   ],
   Support: [
-    { label: "FAQ", modal: "faq" },
-    { label: "Contact Us", modal: "contact" },
+    { label: "FAQ", action: "section" },
+    { label: "Contact Us", action: "section" },
   ],
   Legal: [
-    { label: "Privacy Policy", modal: "legal" },
-    { label: "Terms of Service", modal: "legal" },
+    { label: "Privacy Policy", action: "modal", modal: "legal" },
+    { label: "Terms of Service", action: "modal", modal: "legal" },
   ],
 };
 
 const Footer = () => {
+  const scrollToSection = (index: number) => {
+    window.dispatchEvent(new CustomEvent("scrollToSection", { detail: index }));
+  };
+
   const openModal = (modal: string) => {
     window.dispatchEvent(new CustomEvent("openModal", { detail: modal }));
+  };
+
+  const handleClick = (link: { label: string; action: string; modal?: string }) => {
+    if (link.action === "section" && sectionLinks[link.label] !== undefined) {
+      scrollToSection(sectionLinks[link.label]);
+    } else if (link.modal) {
+      openModal(link.modal);
+    }
   };
 
   return (
@@ -39,7 +59,7 @@ const Footer = () => {
                 {links.map((link) => (
                   <li key={link.label}>
                     <button
-                      onClick={() => openModal(link.modal)}
+                      onClick={() => handleClick(link)}
                       className="hover:text-primary-foreground transition-colors cursor-pointer text-left"
                     >
                       {link.label}
