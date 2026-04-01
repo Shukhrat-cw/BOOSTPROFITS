@@ -1,13 +1,48 @@
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const playVideo = () => {
+      const attempt = video.play();
+      if (attempt && typeof attempt.catch === "function") {
+        attempt.catch(() => undefined);
+      }
+    };
+
+    playVideo();
+
+    const handleLoadedData = () => playVideo();
+    const handlePageShow = () => playVideo();
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        playVideo();
+      }
+    };
+
+    video.addEventListener("loadeddata", handleLoadedData);
+    window.addEventListener("pageshow", handlePageShow);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      video.removeEventListener("loadeddata", handleLoadedData);
+      window.removeEventListener("pageshow", handlePageShow);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   return (
     <section className="relative isolate min-h-[100dvh] w-full overflow-hidden bg-[hsl(220,60%,6%)]">
-      {/* Video background — behind everything */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -15,7 +50,6 @@ const HeroSection = () => {
         preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ zIndex: 0 }}
-        onCanPlay={(e) => (e.currentTarget as HTMLVideoElement).play().catch(() => {})}
       >
         <source
           src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-2391/1080p.mp4"
@@ -23,7 +57,6 @@ const HeroSection = () => {
         />
       </video>
 
-      {/* Dark gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -33,7 +66,6 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Animated glow orbs */}
       <motion.div
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -47,7 +79,6 @@ const HeroSection = () => {
         style={{ zIndex: 2, backgroundColor: "hsla(4,90%,58%,0.08)" }}
       />
 
-      {/* Content — on top of everything */}
       <div
         className="relative mx-auto flex min-h-[100dvh] max-w-7xl items-center px-6 py-24"
         style={{ zIndex: 10 }}
@@ -114,7 +145,6 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Dashboard mockup */}
           <motion.div
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}

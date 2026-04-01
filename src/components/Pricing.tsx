@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import PricingToggle from "@/components/PricingToggle";
 
 const plans = [
   {
@@ -57,20 +58,7 @@ const Pricing = () => {
             Start free. No credit card required. 30-day money-back guarantee.
           </p>
 
-          {/* Toggle */}
-          <div className="flex items-center justify-center gap-3 pt-4">
-            <span className={`text-sm font-medium transition-colors ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
-            <button
-              onClick={() => setAnnual(!annual)}
-              className={`relative h-7 w-12 rounded-full transition-colors duration-300 ${annual ? "bg-accent" : "bg-border"}`}
-              aria-label="Toggle annual pricing"
-            >
-              <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-card shadow-md transition-transform duration-300 ${annual ? "translate-x-5" : "translate-x-0.5"}`} />
-            </button>
-            <span className={`text-sm font-medium transition-colors ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-              Annual <span className="text-accent text-xs font-bold">Save 17%</span>
-            </span>
-          </div>
+          <PricingToggle annual={annual} onAnnualChange={setAnnual} className="pt-4" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">

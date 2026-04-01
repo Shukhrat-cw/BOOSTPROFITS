@@ -3,6 +3,7 @@ import ModalShell from "./ModalShell";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import PricingToggle from "@/components/PricingToggle";
 
 interface Props {
   open: boolean;
@@ -33,18 +34,7 @@ const PricingModal = ({ open, onOpenChange }: Props) => {
   return (
     <ModalShell open={open} onOpenChange={onOpenChange} title="Pricing" description="Simple, transparent pricing. No hidden fees.">
       <div className="space-y-6 py-4">
-        <div className="flex items-center justify-center gap-3">
-          <span className={`text-sm font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
-          <button
-            onClick={() => setAnnual(!annual)}
-            className={`relative h-7 w-12 rounded-full transition-colors ${annual ? "bg-accent" : "bg-border"}`}
-          >
-            <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-card shadow transition-transform ${annual ? "translate-x-5" : "translate-x-0.5"}`} />
-          </button>
-          <span className={`text-sm font-medium ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-            Annual <span className="text-accent text-xs font-bold">-17%</span>
-          </span>
-        </div>
+        <PricingToggle annual={annual} onAnnualChange={setAnnual} />
 
         <div className="grid sm:grid-cols-2 gap-4">
           {plans.map((p) => (
